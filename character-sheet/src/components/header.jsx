@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import '../style/header.css'
 
 function Header(props) {
@@ -10,6 +11,10 @@ function Header(props) {
             </div>
         </header>
     )
+}
+
+Header.propTypes = {
+    pageTitle: PropTypes.string
 }
 
 export default Header;
