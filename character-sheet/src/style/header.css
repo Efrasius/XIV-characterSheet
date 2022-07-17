@@ -1,0 +1,20 @@
+@font-face {
+    font-family: "XIV";
+    src: url("../fonts/OPTIEngeEtienne.otf")
+}
+
+.banner {
+    height: 250px;
+    background-image: url("../images/bann.jpg");
+    background-position: center;
+}
+
+.pageTitle {
+    font-family: "XIV";
+    padding-top: 30px;
+    color: grey;
+    font-size: 5em;
+    margin-top: 0;
+    margin-bottom: 0;
+    -webkit-text-stroke: 0.01px white;
+}
