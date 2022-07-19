@@ -39,3 +39,11 @@
     border-radius: 30px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
+
+.editor {
+    width: 1000px;
+    margin-top : 150px;
+    margin-bottom: 50px;
+    margin-right: auto;
+    margin-left: auto;
+}
