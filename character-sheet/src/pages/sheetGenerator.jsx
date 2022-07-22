@@ -1,5 +1,6 @@
 import Header from '../components/header'
 import SheetForm from '../components/sheetForm'
+import React from 'react';
 
 function SheetGenerator() {
     return (

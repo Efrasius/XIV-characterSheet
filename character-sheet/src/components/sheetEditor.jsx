@@ -1,5 +1,6 @@
 import 'tui-image-editor/dist/tui-image-editor.css';
 import ImageEditor from '@toast-ui/react-image-editor';
+import React from 'react';
 
 const myTheme = {
   // Theme object to extends default dark theme.
@@ -22,7 +23,7 @@ const SheetEditor = () => (
   <ImageEditor
     includeUI={{
       loadImage: {
-        path: './images/bann.jpg',
+        path: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
         name: 'SampleImage',
       },
       locale: locale_fr_FR,

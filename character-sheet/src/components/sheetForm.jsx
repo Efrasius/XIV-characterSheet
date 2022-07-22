@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../style/sheetForm.css'
-//import {Dropzone, FileItem} from "@dropzone-ui/react"
-import SheetEditor from './customImageEditor';
+import SheetEditor from './sheetEditor';
 
 
 const myTheme = {
@@ -13,11 +12,7 @@ function SheetForm() {
     const [mainJob, setmainJob] = useState("");
     const [err, setErr] = useState("");
 
-    //dropzoneUI setup
-    //const [files, setFiles] = React.useState([]);
-    /*const updateFiles = (incommingFiles) => {
-    setFiles(incommingFiles);
-  };*/
+
 
     const launchApi = async (event) => {
         event.preventDefault();
