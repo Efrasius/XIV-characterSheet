@@ -6,6 +6,8 @@
 .banner {
     height: 250px;
     background-image: url("../images/bann.jpg");
+    background-repeat: no-repeat;
+    background-color: black;
     background-position: center;
 }
 
