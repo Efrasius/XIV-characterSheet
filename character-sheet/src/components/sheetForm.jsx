@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../style/sheetForm.css'
 import SheetEditor from './sheetEditor';
+import JobList from './jobList';
 
 
 const myTheme = {
@@ -9,8 +10,12 @@ const myTheme = {
 
 function SheetForm() {
     const [lodestoneId, setLodestoneId] = useState("");
-    const [mainJob, setmainJob] = useState("");
+    const [mainJob, setmainJob] = useState("Paladin");
     const [err, setErr] = useState("");
+    const [iconPath, setIconPath] = useState("../images/Set1/");
+    //const [showStyle, setShowStyle] = useState("");
+    const [jobArray, setJobArray] = useState([]);
+    const [jobComp, setJobComp] = useState("");
 
 
 
@@ -23,14 +28,29 @@ function SheetForm() {
             try {
                 fetch(`https://xivapi.com/character/${lodestoneId}`)
                     .then(response => response.json())
-                    .then(data => console.log(data.Character.ClassJobs))
+                    .then(data => {
+                        if (data.Error != true) {
+                            console.log(data.Character.ClassJobs);
+                            setJobArray(data.Character.ClassJobs);
+                        }
+                        else {
+                            alert("Erreur lors de la récupération des informations. Vérifiez l'id.")
+                        }
+                        
+                    })
             }
-            catch (err) {
-                setErr(err.message);
+            catch (error) {
+                setErr(error.message);
                 console.log("erreur lors du fetch : ", err);
             }
+
         }
     }
+
+    useEffect(() => {
+
+        console.log(jobArray);
+    })
 
     return (
         <div>
@@ -77,6 +97,7 @@ function SheetForm() {
                 </div>
                 <input type="submit" className="formSubmit" value="Générer Ma fiche !" onClick={launchApi} />
             </form>
+            <JobList jobList={jobArray} iconPath={iconPath} />
             <div className="editor">
                 <SheetEditor />
             </div>
