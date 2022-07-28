@@ -4,6 +4,8 @@ import "../style/jobList.css"
 export default function JobList(props) {
     const {jobList} = props;
     const {iconPath} = props;
+    const {background} = props;
+
     const tank = [];
     const heal = [];
     const physicDps = [];
@@ -47,7 +49,7 @@ export default function JobList(props) {
 
 
     return(
-        <div className='jobList' id='jobList'>
+        <div className={`jobList ${background ? "fond": ""}`} id='jobList'>
             <div className="jobType">
                 <div className="jobWrapper">
                     {tank.map((val, key) => {

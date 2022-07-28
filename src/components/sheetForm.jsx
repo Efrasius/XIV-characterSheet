@@ -3,18 +3,18 @@ import '../style/sheetForm.css'
 import SheetEditor from './sheetEditor';
 import JobList from './jobList';
 import * as htmlToImage from 'html-to-image';
-import toPng from 'html-to-image';
 
 
 
 function SheetForm() {
     const [lodestoneId, setLodestoneId] = useState("");
-    const [mainJob, setmainJob] = useState("Paladin");
+    //const [mainJob, setmainJob] = useState("Paladin");
     const [err, setErr] = useState("");
     const [iconPath, setIconPath] = useState("Set1/");
     //const [showStyle, setShowStyle] = useState("");
     const [jobArray, setJobArray] = useState([]);
-    const [jobComp, setJobComp] = useState("");
+    //const [jobComp, setJobComp] = useState("");
+    const [checked, setChecked] = useState(false);
 
 
 
@@ -30,6 +30,7 @@ function SheetForm() {
                     .then(data => {
                         if (data.Error !== true) {
                             setJobArray(data.Character.ClassJobs);
+                            generateImg();
                         }
                         else {
                             alert("Erreur lors de la récupération des informations. Vérifiez l'id.")
@@ -44,11 +45,10 @@ function SheetForm() {
         }
     }
 
-    useEffect(() => {
+    function generateImg() {
         setTimeout(() => {
             let node = document.getElementById('jobList');
 
-            console.log(node);
             if (node !== null) {
                 htmlToImage.toPng(node)
                     .then(dataUrl => {
@@ -64,7 +64,7 @@ function SheetForm() {
             }
         }, 500)
         
-    })
+    }
 
     return (
         <div>
@@ -72,6 +72,10 @@ function SheetForm() {
                 <div className="formLabeled">
                     <label className="formLabel" htmlFor="lodestoneId">Lodestone ID</label>
                     <input id="lodestoneId" className="formInput" name="lodestoneId" value={lodestoneId} onChange={(e) => setLodestoneId(e.target.value)} type="text" />
+                </div>
+                <div className='formLabeled'>
+                    <label className='formLabel' htmlFor='background'>Fond liste de jobs</label>
+                    <input id='background' name='background' type='checkbox' checked={checked} onChange={(e) => setChecked(e.target.checked)} />
                 </div>
                 {/*<div className="formLabeled">
                     <label className="formLabel" htmlFor="mainJob">Main Job</label>
@@ -111,8 +115,7 @@ function SheetForm() {
                 </div>*/}
                 <input type="submit" className="formSubmit" value="Générer Ma fiche !" onClick={launchApi} />
             </form>
-            <div className="jobImg"></div>
-            <JobList jobList={jobArray} iconPath={iconPath} />
+            <JobList jobList={jobArray} iconPath={iconPath} background={checked} />
             <div className="editor">
                 <SheetEditor />
             </div>
