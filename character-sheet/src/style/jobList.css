@@ -1,0 +1,38 @@
+@font-face {
+    font-family: "XIV";
+    src: url("../fonts/OPTIEngeEtienne.otf")
+}
+
+.jobList {
+    font-family: "XIV";
+    font-size: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.jobType {
+    display: flex;
+}
+
+.jobWrapper {
+    display: flex;
+    margin: 15px;
+    flex-wrap: nowrap;
+}
+
+.job {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-around;
+    margin: 5px;
+}
+
+.jobIcon {
+    width: 55px;
+}
+
+.lvl {
+    margin-top: 0px;
+}

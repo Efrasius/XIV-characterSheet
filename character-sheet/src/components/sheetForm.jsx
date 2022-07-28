@@ -4,15 +4,12 @@ import SheetEditor from './sheetEditor';
 import JobList from './jobList';
 
 
-const myTheme = {
-  // Theme object to extends default dark theme.
-};
 
 function SheetForm() {
     const [lodestoneId, setLodestoneId] = useState("");
     const [mainJob, setmainJob] = useState("Paladin");
     const [err, setErr] = useState("");
-    const [iconPath, setIconPath] = useState("../images/Set1/");
+    const [iconPath, setIconPath] = useState("Set1/");
     //const [showStyle, setShowStyle] = useState("");
     const [jobArray, setJobArray] = useState([]);
     const [jobComp, setJobComp] = useState("");
@@ -29,7 +26,7 @@ function SheetForm() {
                 fetch(`https://xivapi.com/character/${lodestoneId}`)
                     .then(response => response.json())
                     .then(data => {
-                        if (data.Error != true) {
+                        if (data.Error !== true) {
                             console.log(data.Character.ClassJobs);
                             setJobArray(data.Character.ClassJobs);
                         }
@@ -59,7 +56,7 @@ function SheetForm() {
                     <label className="formLabel" htmlFor="lodestoneId">Lodestone ID</label>
                     <input id="lodestoneId" className="formInput" name="lodestoneId" value={lodestoneId} onChange={(e) => setLodestoneId(e.target.value)} type="text" />
                 </div>
-                <div className="formLabeled">
+                {/*<div className="formLabeled">
                     <label className="formLabel" htmlFor="mainJob">Main Job</label>
                     <select id="mainJob" name="mainJob" className="formInput" value={mainJob} onChange={(e) => setmainJob(e.target.value)}>
                         <option value="Paladin">Paladin</option>
@@ -94,7 +91,7 @@ function SheetForm() {
                         <option value="botaniste">Botaniste</option>
                         <option value="pecheur">Pêcheur</option>
                     </select>
-                </div>
+                </div>*/}
                 <input type="submit" className="formSubmit" value="Générer Ma fiche !" onClick={launchApi} />
             </form>
             <JobList jobList={jobArray} iconPath={iconPath} />
