@@ -17,7 +17,6 @@ export default function JobList(props) {
 
 
     function parse() {
-        console.log(jobList);
         jobList.forEach(job => {
             let jobName = job.Name.split(" / ")[1];
             let imgPath = iconPath + jobName + '.png'
@@ -46,14 +45,13 @@ export default function JobList(props) {
     }
     parse();
 
-    console.log(tank, heal, physicDps, rangeDps, magicDps, craft, farm);
 
     return(
-        <div className='jobList'>
+        <div className='jobList' id='jobList'>
             <div className="jobType">
                 <div className="jobWrapper">
                     {tank.map((val, key) => {
-                        return (<div className="job">
+                        return (<div className="job" key={key}>
                                     <img className="jobIcon" src={require("../images/" + iconPath + val.jobName + ".png")} alt={val.jobName} />
                                     <p className="lvl">{val.level}</p>
                                 </div>)
@@ -61,7 +59,7 @@ export default function JobList(props) {
                 </div>
                 <div className="jobWrapper">
                     {heal.map((val, key) => {
-                        return (<div className="job">
+                        return (<div className="job" key={key}>
                                     <img className="jobIcon" src={require("../images/" + iconPath + val.jobName + ".png")} alt={val.jobName} />
                                     <p className="lvl">{val.level}</p>
                                 </div>)
@@ -71,7 +69,7 @@ export default function JobList(props) {
             <div className='jobType'>
                 <div className="jobWrapper">
                     {physicDps.map((val, key) => {
-                        return (<div className="job">
+                        return (<div className="job" key={key}>
                                     <img className="jobIcon" src={require("../images/" + iconPath + val.jobName + ".png")} alt={val.jobName} />
                                     <p className="lvl">{val.level}</p>
                                 </div>)
@@ -79,7 +77,7 @@ export default function JobList(props) {
                 </div>
                 <div className="jobWrapper">
                     {rangeDps.map((val, key) => {
-                        return (<div className="job">
+                        return (<div className="job"  key={key}>
                                     <img className="jobIcon" src={require("../images/" + iconPath + val.jobName + ".png")} alt={val.jobName} />
                                     <p className="lvl">{val.level}</p>
                                 </div>)
@@ -87,7 +85,7 @@ export default function JobList(props) {
                 </div>
                 <div className="jobWrapper">
                     {magicDps.map((val, key) => {
-                        return (<div className="job">
+                        return (<div className="job"  key={key}>
                                     <img className="jobIcon" src={require("../images/" + iconPath + val.jobName + ".png")} alt={val.jobName} />
                                     <p className="lvl">{val.level}</p>
                                 </div>)
@@ -97,7 +95,7 @@ export default function JobList(props) {
             <div className='jobType'>
                 <div className="jobWrapper">
                     {craft.map((val, key) => {
-                        return (<div className="job">
+                        return (<div className="job"  key={key}>
                                     <img className="jobIcon" src={require("../images/" + iconPath + val.jobName + ".png")} alt={val.jobName} />
                                     <p className="lvl">{val.level}</p>
                                 </div>)
@@ -105,7 +103,7 @@ export default function JobList(props) {
                 </div>
                 <div className="jobWrapper">
                     {farm.map((val, key) => {
-                        return (<div className="job">
+                        return (<div className="job"  key={key}>
                                     <img className="jobIcon" src={require("../images/" + iconPath + val.jobName + ".png")} alt={val.jobName} />
                                     <p className="lvl">{val.level}</p>
                                 </div>)

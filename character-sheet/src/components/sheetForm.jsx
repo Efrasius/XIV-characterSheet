@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import '../style/sheetForm.css'
 import SheetEditor from './sheetEditor';
 import JobList from './jobList';
+import * as htmlToImage from 'html-to-image';
+import toPng from 'html-to-image';
 
 
 
@@ -27,13 +29,11 @@ function SheetForm() {
                     .then(response => response.json())
                     .then(data => {
                         if (data.Error !== true) {
-                            console.log(data.Character.ClassJobs);
                             setJobArray(data.Character.ClassJobs);
                         }
                         else {
                             alert("Erreur lors de la récupération des informations. Vérifiez l'id.")
                         }
-                        
                     })
             }
             catch (error) {
@@ -45,8 +45,25 @@ function SheetForm() {
     }
 
     useEffect(() => {
+        setTimeout(() => {
+            let node = document.getElementById('jobList');
 
-        console.log(jobArray);
+            console.log(node);
+            if (node !== null) {
+                htmlToImage.toPng(node)
+                    .then(dataUrl => {
+                        const link = document.createElement('a')
+
+                        link.download = 'liste-des-jobs.png'
+                        link.href = dataUrl
+                        link.click()
+                    })
+                    .catch(function (error) {
+                        console.error('oops, something went wrong!', error);
+                    });
+            }
+        }, 500)
+        
     })
 
     return (
@@ -94,6 +111,7 @@ function SheetForm() {
                 </div>*/}
                 <input type="submit" className="formSubmit" value="Générer Ma fiche !" onClick={launchApi} />
             </form>
+            <div className="jobImg"></div>
             <JobList jobList={jobArray} iconPath={iconPath} />
             <div className="editor">
                 <SheetEditor />
