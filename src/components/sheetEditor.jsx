@@ -23,8 +23,8 @@ const SheetEditor = () => (
   <ImageEditor
     includeUI={{
       loadImage: {
-        path: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-        name: 'SampleImage',
+        path: '/fond.jpg',
+        name: 'Fond',
       },
       locale: locale_fr_FR,
       theme: myTheme,

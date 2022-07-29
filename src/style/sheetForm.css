@@ -35,6 +35,7 @@
     background-color: rgb(250, 250, 250);
     border-radius: 30px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    cursor: pointer;
 }
 
 .editor {
