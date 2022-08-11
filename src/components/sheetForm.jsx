@@ -2,19 +2,15 @@ import React, { useState, useEffect } from 'react';
 import '../style/sheetForm.css'
 import SheetEditor from './sheetEditor';
 import JobList from './jobList';
-import * as htmlToImage from 'html-to-image';
 
 
 
 function SheetForm() {
     const [lodestoneId, setLodestoneId] = useState("");
-    //const [mainJob, setmainJob] = useState("Paladin");
     const [err, setErr] = useState("");
     const [iconPath, setIconPath] = useState("Set1/");
-    //const [showStyle, setShowStyle] = useState("");
     const [jobArray, setJobArray] = useState([]);
-    //const [jobComp, setJobComp] = useState("");
-    const [checked, setChecked] = useState(false);
+
 
 
 
@@ -29,8 +25,9 @@ function SheetForm() {
                     .then(response => response.json())
                     .then(data => {
                         if (data.Error !== true) {
-                            setJobArray(data.Character.ClassJobs);
-                            generateImg();
+                            //console.log(typeof data.Character.ClassJobs)
+                            setJobArray(data.Character);
+                            //generateImg();
                         }
                         else {
                             alert("Erreur lors de la récupération des informations. Vérifiez l'id.")
@@ -45,37 +42,17 @@ function SheetForm() {
         }
     }
 
-    function generateImg() {
-        setTimeout(() => {
-            let node = document.getElementById('jobList');
 
-            if (node !== null) {
-                htmlToImage.toPng(node)
-                    .then(dataUrl => {
-                        const link = document.createElement('a')
 
-                        link.download = 'liste-des-jobs.png'
-                        link.href = dataUrl
-                        link.click()
-                    })
-                    .catch(function (error) {
-                        console.error('oops, something went wrong!', error);
-                    });
-            }
-        }, 500)
-        
-    }
+    useEffect(() => {
+    }, [])
 
     return (
         <div>
-            <form className="myForm" onSubmit={launchApi}>
+            <form className="myForm">
                 <div className="formLabeled">
                     <label className="formLabel" htmlFor="lodestoneId">Lodestone ID</label>
                     <input id="lodestoneId" className="formInput" name="lodestoneId" value={lodestoneId} onChange={(e) => setLodestoneId(e.target.value)} type="text" />
-                </div>
-                <div className='formLabeled'>
-                    <label className='formLabel' htmlFor='background'>Fond liste de jobs</label>
-                    <input id='background' name='background' type='checkbox' checked={checked} onChange={(e) => setChecked(e.target.checked)} />
                 </div>
                 {/*<div className="formLabeled">
                     <label className="formLabel" htmlFor="mainJob">Main Job</label>
@@ -115,7 +92,9 @@ function SheetForm() {
                 </div>*/}
                 <input type="submit" className="formSubmit" value="Générer Ma fiche !" onClick={launchApi} />
             </form>
-            <JobList jobList={jobArray} iconPath={iconPath} background={checked} />
+            <div className="jobForm">
+                <JobList jobList={jobArray.ClassJobs} allInfos={jobArray} iconPath={iconPath} />
+            </div>
             <div className="editor">
                 <SheetEditor />
             </div>

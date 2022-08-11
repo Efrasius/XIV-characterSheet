@@ -6,10 +6,7 @@
 .jobList {
     font-family: "XIV";
     font-size: 60px;
-    width: 870px;
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
     margin-top: 15px;
 }
 
@@ -21,9 +18,19 @@
     display: flex;
 }
 
+#infos {
+    background-color: rgb(238, 238, 238);
+    font-size: 40px;
+}
+
+.infoWrapper {
+    margin: 5px;
+}
+
 .jobWrapper {
     display: flex;
     margin: 15px;
+    height: 160px;
     flex-wrap: nowrap;
 }
 
@@ -31,9 +38,7 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    justify-content: space-around;
     margin: 5px;
-    height: 120px;
 }
 
 .jobIcon {
@@ -41,7 +46,14 @@
 }
 
 .lvl {
-    margin-top: -20px;
-    text-shadow: white 0px 0px 5px;
+    -webkit-text-stroke: 0.5px white;
     transform: scale(1, .5);
+    margin-top: 0px;
+}
+
+
+
+
+.formLabel {
+    font-size: 45px;
 }
