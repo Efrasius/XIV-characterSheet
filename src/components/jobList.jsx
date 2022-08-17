@@ -135,7 +135,7 @@ export default function JobList(props) {
                     <input id='infosColor' name='infosColor' type='checkbox' checked={formParams.infosColor} onChange={(e) => setFormParams(currValue => ({ ...currValue, infosColor: e.target.checked }))} />
                     <SketchPicker id="infosColorPicker" className={`colorPicker infosPicker ${formParams.infosColor? '': 'none'}`} color={jobStyle.infosColor} onChange={handleChange} />
                 </div>
-                <input type="submit" className="formSubmit" value="Télécharger Ma fiche !" onClick={generateImg} />
+                <input type="submit" id="lvlFormSubmit" className="formSubmit" value="Télécharger Ma fiche !" onClick={generateImg} />
             </form>
         </div>
     );

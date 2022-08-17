@@ -6,6 +6,10 @@ export default function CharacterInfos(props) {
 
     //console.log(jobStyle);
 
+    if (!jobStyle.name && !jobStyle.server) {
+        return null;
+    }
+
 
     return (
         <div className='characterInfos' style={{color: `rgb(${jobStyle.infosColor.r}, ${jobStyle.infosColor.g}, ${jobStyle.infosColor.b}, ${jobStyle.infosColor.a})`}}>
