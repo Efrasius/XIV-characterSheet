@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/XIV-characterSheet/static/css/main.30f87b85.css",
-    "main.js": "/XIV-characterSheet/static/js/main.358a5e05.js",
+    "main.js": "/XIV-characterSheet/static/js/main.b1e36ff6.js",
     "static/js/787.dfece2e2.chunk.js": "/XIV-characterSheet/static/js/787.dfece2e2.chunk.js",
     "static/media/bann.jpg": "/XIV-characterSheet/static/media/bann.7fda124a13efc1f88bfe.jpg",
     "static/media/leatherworker.png": "/XIV-characterSheet/static/media/leatherworker.2ccbf7e1b28f2263f1da.png",
@@ -38,11 +38,11 @@
     "static/media/blacksmith.png": "/XIV-characterSheet/static/media/blacksmith.1779022c47e5650b7b0c.png",
     "index.html": "/XIV-characterSheet/index.html",
     "main.30f87b85.css.map": "/XIV-characterSheet/static/css/main.30f87b85.css.map",
-    "main.358a5e05.js.map": "/XIV-characterSheet/static/js/main.358a5e05.js.map",
+    "main.b1e36ff6.js.map": "/XIV-characterSheet/static/js/main.b1e36ff6.js.map",
     "787.dfece2e2.chunk.js.map": "/XIV-characterSheet/static/js/787.dfece2e2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.30f87b85.css",
-    "static/js/main.358a5e05.js"
+    "static/js/main.b1e36ff6.js"
   ]
 }
