@@ -1,0 +1,9 @@
+.characterInfos {
+    display: flex;
+    border-bottom: solid 1px #C0C0C0;
+}
+
+.characterInfo {
+    margin: 0px;
+    margin-right: 30px;
+}

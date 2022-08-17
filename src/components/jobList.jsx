@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import * as htmlToImage from 'html-to-image';
+import { SketchPicker } from 'react-color';
 import JobWrapper from "./jobWrapper";
 import CharacterInfos from "./characterInfos"
 import "../style/jobList.css";
 
 export default function JobList(props) {
-    const [jobStyle, setJobStyle] = useState({ background: 'none', name: false, server: false });
+    const [jobStyle, setJobStyle] = useState({ name: false, server: false, lvlColor: '', infosColor: '' });
+    const [formParams, setFormParams] = useState({ background: false, lvlColor: false, infosColor: false })
+    const [bgColor, setBgColor] = useState({});
 
     const { jobList } = props;
     const { iconPath } = props;
     const { allInfos } = props;
 
     const jobs = {'tank': [], 'heal': [], 'physicDps': [], 'rangeDps': [], 'magicDps': [], 'craft': [], 'farm': []};
+
+
+    useEffect(() => {
+    }, [])
+
 
     if (!jobList || !jobList.length || !iconPath)
         return (null);
@@ -68,9 +76,22 @@ export default function JobList(props) {
 
     }
 
+    function changeBackground(color, event) {
+        setBgColor(color.rgb);
+    }
+
+    function handleChange(color, event) {
+        let picker = event.target.closest(".colorPicker");
+
+        if (picker.classList.contains("levelPicker"))
+            setJobStyle(currValue => ({ ...currValue, lvlColor: color.rgb }))
+        else if (picker.classList.contains("infosPicker"))
+            setJobStyle(currValue => ({ ...currValue, infosColor: color.rgb }))
+    }
+
     return (
         <div className={`jobList`} id='jobList'>
-            <div className={`sheetImg ${jobStyle.background}`} id='sheetImg'>
+            <div className={`sheetImg`} id='sheetImg' style={{background: `rgb(${bgColor.r}, ${bgColor.g}, ${bgColor.b}, ${bgColor.a})`, color: `rgb(${jobStyle.lvlColor.r}, ${jobStyle.lvlColor.g}, ${jobStyle.lvlColor.b}, ${jobStyle.lvlColor.a})`}}>
                 <CharacterInfos jobStyle={jobStyle} allInfos={allInfos} />
                 <div className="jobType">
                     <JobWrapper jobs={jobs.tank} iconPath={iconPath} />
@@ -101,11 +122,18 @@ export default function JobList(props) {
                 <h2>Style</h2>
                 <div className='formLabeled'>
                     <label className='formLabel' htmlFor='background'>Fond liste de jobs</label>
-                    <select id='background' name='background' value={jobStyle.background} onChange={(e) => setJobStyle(currValue => ({ ...currValue, background: e.target.value }))}>
-                        <option value="white">Blanc</option>
-                        <option value="black">Noir</option>
-                        <option value="none">Aucun</option>
-                    </select>
+                    <input id='background' name='background' type='checkbox' checked={jobStyle.background} onChange={(e) => setFormParams(currValue => ({ ...currValue, background: e.target.checked }))} />
+                    <SketchPicker id="background" className={`colorPicker ${formParams.background? '': 'none'}`} color={bgColor} onChange={changeBackground} />
+                </div>
+                <div className='formLabeled'>
+                    <label className='formLabel' htmlFor='lvlColor'>Couleur des niveaux</label>
+                    <input id='lvlColor' name='lvlColor' type='checkbox' checked={formParams.lvlColor} onChange={(e) => setFormParams(currValue => ({ ...currValue, lvlColor: e.target.checked }))} />
+                    <SketchPicker id="lvlColorPicker" className={`colorPicker levelPicker ${formParams.lvlColor? '': 'none'}`} color={jobStyle.lvlColor} onChange={handleChange} />
+                </div>
+                <div className='formLabeled'>
+                    <label className='formLabel' htmlFor='infosColor'>Couleur des infos</label>
+                    <input id='infosColor' name='infosColor' type='checkbox' checked={formParams.infosColor} onChange={(e) => setFormParams(currValue => ({ ...currValue, infosColor: e.target.checked }))} />
+                    <SketchPicker id="infosColorPicker" className={`colorPicker infosPicker ${formParams.infosColor? '': 'none'}`} color={jobStyle.infosColor} onChange={handleChange} />
                 </div>
                 <input type="submit" className="formSubmit" value="Télécharger Ma fiche !" onClick={generateImg} />
             </form>

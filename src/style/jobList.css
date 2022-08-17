@@ -10,19 +10,16 @@ h2 {
     border-bottom: solid 2px #C0C0C0;
 }
 
+.none {
+    display: none;
+}
+
 .jobList {
     font-family: "XIV";
     font-size: 60px;
     display: flex;
     margin-top: 15px;
-}
-
-.white {
-    background-color: white;
-}
-
-.black {
-    background-color: black;
+    height: 700px;
 }
 
 .jobType {
@@ -52,7 +49,6 @@ h2 {
 }
 
 .lvl {
-    -webkit-text-stroke: 0.5px white;
     transform: scale(1, .5);
     margin-top: 0px;
 }
@@ -72,7 +68,11 @@ h2 {
     margin-bottom: 0px;
 }
 
-#background {
-    width: 120px;
-    height: 35px;
+.colorPicker {
+    position: absolute;
+    z-index: 1;
+}
+
+.turn {
+    transform: rotate(90deg);
 }

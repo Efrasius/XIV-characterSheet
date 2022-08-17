@@ -58,7 +58,10 @@ function SheetForm() {
 
 
     useEffect(() => {
+
     }, [])
+
+    console.log(jobArray.Name)
 
     return (
         <div>
