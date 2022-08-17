@@ -10,6 +10,7 @@ function SheetForm() {
     const [err, setErr] = useState("");
     const [iconPath, setIconPath] = useState("Set1/");
     const [jobArray, setJobArray] = useState([]);
+    const [pvpArray, setPvpArray] = useState([]);
 
 
 
@@ -38,7 +39,19 @@ function SheetForm() {
                 setErr(error.message);
                 console.log("erreur lors du fetch : ", err);
             }
-
+            try {
+                fetch(`https://xivapi.com/pvpteam/${lodestoneId}`)
+                    .then (response => response.json())
+                    .then(data => {
+                        if (data.Error !== true) {
+                            setPvpArray(data.Pvpteam);
+                        }
+                    })
+            }
+            catch (error) {
+                setErr(error.message);
+                console.log("erreur lors du fetch : ", err);
+            }
         }
     }
 
@@ -92,9 +105,7 @@ function SheetForm() {
                 </div>*/}
                 <input type="submit" className="formSubmit" value="Générer Ma fiche !" onClick={launchApi} />
             </form>
-            <div className="jobForm">
-                <JobList jobList={jobArray.ClassJobs} allInfos={jobArray} iconPath={iconPath} />
-            </div>
+            <JobList jobList={jobArray.ClassJobs} allInfos={jobArray} iconPath={iconPath} />
             <div className="editor">
                 <SheetEditor />
             </div>

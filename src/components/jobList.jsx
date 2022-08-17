@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import * as htmlToImage from 'html-to-image';
-import "../style/jobList.css"
+import JobWrapper from "./jobWrapper";
+import CharacterInfos from "./characterInfos"
+import "../style/jobList.css";
 
 export default function JobList(props) {
-    const [jobStyle, setJobStyle] = useState({ background: false, name: false });
+    const [jobStyle, setJobStyle] = useState({ background: 'none', name: false, server: false });
 
     const { jobList } = props;
     const { iconPath } = props;
     const { allInfos } = props;
 
-    const tank = [];
-    const heal = [];
-    const physicDps = [];
-    const rangeDps = [];
-    const magicDps = [];
-    const craft = [];
-    const farm = [];
-
+    const jobs = {'tank': [], 'heal': [], 'physicDps': [], 'rangeDps': [], 'magicDps': [], 'craft': [], 'farm': []};
 
     if (!jobList || !jobList.length || !iconPath)
         return (null);
@@ -28,32 +23,33 @@ export default function JobList(props) {
             let imgPath = iconPath + jobName + '.png'
 
             if (jobName === "paladin" || jobName === "warrior" || jobName === "dark knight" || jobName === "gunbreaker") {
-                tank.push({ "jobName": jobName, "imgPath": imgPath, "level": job.Level });
+                jobs.tank.push({ "jobName": jobName, "imgPath": imgPath, "level": job.Level });
             }
             else if (jobName === "white mage" || jobName === "scholar" || jobName === "astrologian" || jobName === "sage") {
-                heal.push({ "jobName": jobName, "imgPath": imgPath, "level": job.Level });
+                jobs.heal.push({ "jobName": jobName, "imgPath": imgPath, "level": job.Level });
             }
             else if (jobName === "monk" || jobName === "dragoon" || jobName === "ninja" || jobName === "samurai" || jobName === "reaper") {
-                physicDps.push({ "jobName": jobName, "imgPath": imgPath, "level": job.Level });
+                jobs.physicDps.push({ "jobName": jobName, "imgPath": imgPath, "level": job.Level });
             }
             else if (jobName === "bard" || jobName === "machinist" || jobName === "dancer") {
-                rangeDps.push({ "jobName": jobName, "imgPath": imgPath, "level": job.Level });
+                jobs.rangeDps.push({ "jobName": jobName, "imgPath": imgPath, "level": job.Level });
             }
             else if (jobName === "black mage" || jobName === "summoner" || jobName === "red mage" || jobName === "blue mage") {
-                magicDps.push({ "jobName": jobName, "imgPath": imgPath, "level": job.Level });
+                jobs.magicDps.push({ "jobName": jobName, "imgPath": imgPath, "level": job.Level });
             }
             else if (jobName === "carpenter" || jobName === "blacksmith" || jobName === "armorer" || jobName === "goldsmith" || jobName === "leatherworker" || jobName === "weaver" || jobName === "alchemist" || jobName === "culinarian") {
-                craft.push({ "jobName": jobName, "imgPath": imgPath, "level": job.Level });
+                jobs.craft.push({ "jobName": jobName, "imgPath": imgPath, "level": job.Level });
             }
             else
-                farm.push({ "jobName": jobName, "imgPath": imgPath, "level": job.Level });
+                jobs.farm.push({ "jobName": jobName, "imgPath": imgPath, "level": job.Level });
         })
     }
     parse();
 
-    function generateImg() {
+    function generateImg(e) {
+        e.preventDefault();
         setTimeout(() => {
-            let node = document.getElementById('jobList');
+            let node = document.getElementById('sheetImg');
 
             if (node !== null) {
                 htmlToImage.toPng(node)
@@ -72,86 +68,44 @@ export default function JobList(props) {
 
     }
 
-
     return (
-        <div className={`jobList ${jobStyle.background ? "fond" : ""}`} id='jobList'>
-            <div>
-                <div id="infos">
-                    {//<CharacterInfos jobStyle={jobStyle} allInfos={allInfos} />
-                    }
-                    {jobStyle.name ? <p className='infoWrapper'>{allInfos.Name}</p> : <p></p>}
-                </div>
+        <div className={`jobList`} id='jobList'>
+            <div className={`sheetImg ${jobStyle.background}`} id='sheetImg'>
+                <CharacterInfos jobStyle={jobStyle} allInfos={allInfos} />
                 <div className="jobType">
-                    <div className="jobWrapper">
-                        {tank.map((val, key) => {
-                            return (<div className="job" key={key}>
-                                <img className="jobIcon" src={require("../images/" + iconPath + val.jobName + ".png")} alt={val.jobName} />
-                                <p className="lvl">{val.level}</p>
-                            </div>)
-                        })}
-                    </div>
-                    <div className="jobWrapper">
-                        {heal.map((val, key) => {
-                            return (<div className="job" key={key}>
-                                <img className="jobIcon" src={require("../images/" + iconPath + val.jobName + ".png")} alt={val.jobName} />
-                                <p className="lvl">{val.level}</p>
-                            </div>)
-                        })}
-                    </div>
+                    <JobWrapper jobs={jobs.tank} iconPath={iconPath} />
+                    <JobWrapper jobs={jobs.heal} iconPath={iconPath} />
                 </div>
                 <div className='jobType'>
-                    <div className="jobWrapper">
-                        {physicDps.map((val, key) => {
-                            return (<div className="job" key={key}>
-                                <img className="jobIcon" src={require("../images/" + iconPath + val.jobName + ".png")} alt={val.jobName} />
-                                <p className="lvl">{val.level}</p>
-                            </div>)
-                        })}
-                    </div>
-                    <div className="jobWrapper">
-                        {rangeDps.map((val, key) => {
-                            return (<div className="job" key={key}>
-                                <img className="jobIcon" src={require("../images/" + iconPath + val.jobName + ".png")} alt={val.jobName} />
-                                <p className="lvl">{val.level}</p>
-                            </div>)
-                        })}
-                    </div>
-                    <div className="jobWrapper">
-                        {magicDps.map((val, key) => {
-                            return (<div className="job" key={key}>
-                                <img className="jobIcon" src={require("../images/" + iconPath + val.jobName + ".png")} alt={val.jobName} />
-                                <p className="lvl">{val.level}</p>
-                            </div>)
-                        })}
-                    </div>
+                    <JobWrapper jobs={jobs.physicDps} iconPath={iconPath} />
+                    <JobWrapper jobs={jobs.rangeDps} iconPath={iconPath} />
+                    <JobWrapper jobs={jobs.magicDps} iconPath={iconPath} />
                 </div>
                 <div className='jobType'>
-                    <div className="jobWrapper">
-                        {craft.map((val, key) => {
-                            return (<div className="job" key={key}>
-                                <img className="jobIcon" src={require("../images/" + iconPath + val.jobName + ".png")} alt={val.jobName} />
-                                <p className="lvl">{val.level}</p>
-                            </div>)
-                        })}
-                    </div>
-                    <div className="jobWrapper">
-                        {farm.map((val, key) => {
-                            return (<div className="job" key={key}>
-                                <img className="jobIcon" src={require("../images/" + iconPath + val.jobName + ".png")} alt={val.jobName} />
-                                <p className="lvl">{val.level}</p>
-                            </div>)
-                        })}
-                    </div>
+                    <JobWrapper jobs={jobs.craft} iconPath={iconPath} />
+                    <JobWrapper jobs={jobs.farm} iconPath={iconPath} />
             </div>
             </div>
             <form className='jobForm'>
-                <div className='formLabeled'>
-                    <label className='formLabel' htmlFor='background'>Fond liste de jobs</label>
-                    <input id='background' name='background' type='checkbox' checked={jobStyle.background} onChange={(e) => setJobStyle(currValue => ({ ...currValue, background: e.target.checked }))} />
-                </div>
+                <h2>Infos</h2>
                 <div className='formLabeled'>
                     <label className='formLabel' htmlFor='name'>Nom du Personnage</label>
                     <input id='name' name='name' type='checkbox' checked={jobStyle.name} onChange={(e) => setJobStyle(currValue => ({ ...currValue, name: e.target.checked }))} />
+                </div>
+                <div className='formLabeled'>
+                    <label className='formLabel' htmlFor='server'>Serveur</label>
+                    <input id='server' name='server' type='checkbox' checked={jobStyle.server} onChange={(e) => setJobStyle(currValue => ({ ...currValue, server: e.target.checked }))} />
+                </div>
+                
+
+                <h2>Style</h2>
+                <div className='formLabeled'>
+                    <label className='formLabel' htmlFor='background'>Fond liste de jobs</label>
+                    <select id='background' name='background' value={jobStyle.background} onChange={(e) => setJobStyle(currValue => ({ ...currValue, background: e.target.value }))}>
+                        <option value="white">Blanc</option>
+                        <option value="black">Noir</option>
+                        <option value="none">Aucun</option>
+                    </select>
                 </div>
                 <input type="submit" className="formSubmit" value="Télécharger Ma fiche !" onClick={generateImg} />
             </form>

@@ -3,6 +3,13 @@
     src: url("../fonts/OPTIEngeEtienne.otf")
 }
 
+h2 {
+    transform: scale(1, .5);
+    font-weight: lighter;
+    margin: 0px;
+    border-bottom: solid 2px #C0C0C0;
+}
+
 .jobList {
     font-family: "XIV";
     font-size: 60px;
@@ -10,17 +17,16 @@
     margin-top: 15px;
 }
 
-.fond {
-    background-color: rgba(255, 255, 255, 0.25);
+.white {
+    background-color: white;
+}
+
+.black {
+    background-color: black;
 }
 
 .jobType {
     display: flex;
-}
-
-#infos {
-    background-color: rgb(238, 238, 238);
-    font-size: 40px;
 }
 
 .infoWrapper {
@@ -51,9 +57,22 @@
     margin-top: 0px;
 }
 
-
+.jobForm {
+    background-color: rgb(238, 238, 238);
+    padding: 10px;
+    margin-left: 15px;
+}
 
 
 .formLabel {
     font-size: 45px;
+}
+
+.formLabeled {
+    margin-bottom: 0px;
+}
+
+#background {
+    width: 120px;
+    height: 35px;
 }
