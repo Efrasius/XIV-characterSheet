@@ -1,0 +1,41 @@
+.jobForm {
+    background-color: rgb(238, 238, 238);
+    padding: 10px;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.jobInputs {
+    overflow: scroll;
+    height: 435px;
+}
+
+.formStyle {
+    justify-content: space-between;
+}
+
+.colorPicker {
+    position: absolute;
+    margin-top: -150px;
+    z-index: 3;
+}
+
+.turn {
+    transform: rotate(90deg);
+}
+
+#lvlFormSubmit {
+    margin-left: 50px;
+}
+
+.paletteIcon {
+    width: 30px;
+    margin-top: 25px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.rotate {
+    transform: rotate(-90deg);
+    transition: 0.5s;
+}

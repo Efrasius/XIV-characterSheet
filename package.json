@@ -1,11 +1,12 @@
 {
   "name": "character-sheet",
   "version": "1.5.0",
+  "homepage": "https://efrasius.github.io/XIV-characterSheet/",
   "private": true,
   "dependencies": {
     "@dropzone-ui/react": "^6.7.4",
-    "@fortawesome/fontawesome-svg-core": "^6.1.2",
-    "@fortawesome/free-solid-svg-icons": "^6.1.2",
+    "@fortawesome/fontawesome-svg-core": "^6.2.0",
+    "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@reduxjs/toolkit": "^1.8.4",
     "@testing-library/jest-dom": "^5.14.1",

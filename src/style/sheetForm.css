@@ -3,24 +3,31 @@
     src: url("../fonts/OPTIEngeEtienne.otf")
 }
 
+.sheetForm {
+    margin-bottom: 15px;
+}
+
 .myForm {
     display: flex;
     flex-direction: column;
-    width: 100%;
+
     /*min-width: 450px;*/
-    margin-left: auto;
-    margin-right: auto;
+
     background-color: rgb(238, 238, 238);
     margin-top: 30px;
     padding: 10px;
 }
 
+.formInput {
+    height: 35px;
+    width: 100px;
+    margin-top: 15px;
+}
 
 .formLabeled {
     display: flex;
     margin-right : auto;
     margin-left: auto;
-    margin-bottom: 50px;
 }
 
 .formLabel {
@@ -28,10 +35,6 @@
     font-size: 2.5em;
     margin-right: 50px;
     transform: scale(1, .5);
-}
-
-.formInput {
-    height: 35px;
 }
 
 .formSubmit {
@@ -42,6 +45,10 @@
     border-radius: 30px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     cursor: pointer;
+}
+
+.jobs {
+    display: flex;
 }
 
 .editor {

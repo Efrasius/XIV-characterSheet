@@ -14,7 +14,7 @@ root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path="/" element={<SheetGenerator />} />
+        <Route path="/XIV-characterSheet" element={<SheetGenerator />} />
       </Routes>
     </Router>
   </React.StrictMode>

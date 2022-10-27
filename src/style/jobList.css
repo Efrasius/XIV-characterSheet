@@ -17,9 +17,8 @@ h2 {
 .jobList {
     font-family: "XIV";
     font-size: 60px;
-    display: flex;
     margin-top: 15px;
-    height: 700px;
+    display: inline-block;
 }
 
 .jobType {
@@ -33,7 +32,7 @@ h2 {
 .jobWrapper {
     display: flex;
     margin: 15px;
-    height: 160px;
+    height: 130px;
     flex-wrap: nowrap;
 }
 
@@ -53,30 +52,9 @@ h2 {
     margin-top: 0px;
 }
 
-.jobForm {
-    background-color: rgb(238, 238, 238);
-    padding: 10px;
-    margin-left: 15px;
-}
-
-
 .formLabel {
     font-size: 45px;
 }
 
-.formLabeled {
-    margin-bottom: 0px;
-}
 
-.colorPicker {
-    position: absolute;
-    z-index: 1;
-}
 
-.turn {
-    transform: rotate(90deg);
-}
-
-#lvlFormSubmit {
-    margin-left: 50px;
-}

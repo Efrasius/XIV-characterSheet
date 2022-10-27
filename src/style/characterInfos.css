@@ -1,6 +1,13 @@
 .characterInfos {
     display: flex;
+}
+
+.top {
     border-bottom: solid 1px #C0C0C0;
+}
+
+.bottom {
+    border-top: solid 1px #C0C0C0;
 }
 
 .characterInfo {

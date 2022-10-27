@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../style/sheetForm.css'
 import SheetEditor from './sheetEditor';
 import JobList from './jobList';
+import JobForm from './jobForm';
 
 
 
@@ -11,8 +12,10 @@ function SheetForm() {
     const [iconPath, setIconPath] = useState("Set1/");
     const [jobArray, setJobArray] = useState([]);
     const [pvpArray, setPvpArray] = useState([]);
-
-
+    const [formParams, setFormParams] = useState({ background: false, lvlColor: false, infosColor: false })
+    const [jobStyle, setJobStyle] = useState({ portrait: false, name: false, server: false, position: 'top', lvlColor: '', infosColor: '' });
+    const [bgColor, setBgColor] = useState({});
+    const [displayForm, setDisplayForm] = useState(false);
 
 
     const launchApi = async (event) => {
@@ -28,6 +31,7 @@ function SheetForm() {
                         if (data.Error !== true) {
                             //console.log(typeof data.Character.ClassJobs)
                             setJobArray(data.Character);
+                            setDisplayForm(true);
                             //generateImg();
                         }
                         else {
@@ -58,10 +62,8 @@ function SheetForm() {
 
 
     useEffect(() => {
-
-    }, [])
-
-    console.log(jobArray.Name)
+        console.log(jobStyle);
+    }, [jobStyle])
 
     return (
         <div>
@@ -108,10 +110,13 @@ function SheetForm() {
                 </div>*/}
                 <input type="submit" className="formSubmit" value="Générer Ma fiche !" onClick={launchApi} />
             </form>
-            <JobList jobList={jobArray.ClassJobs} allInfos={jobArray} iconPath={iconPath} />
-            <div className="editor">
-                <SheetEditor />
+            <div className='jobs'>
+                {displayForm?<JobList jobList={jobArray.ClassJobs} allInfos={jobArray} iconPath={iconPath} jobStyle={jobStyle} setJobStyle={setJobStyle} bgColor={bgColor} />: ''}
+                {displayForm?<JobForm formParams={formParams} setFormParams={setFormParams} jobStyle={jobStyle} setJobStyle={setJobStyle} bgColor={bgColor} setBgColor={setBgColor} />: ''}
             </div>
+            {/*<div className="editor">
+                <SheetEditor />
+            </div>*/}
         </div>
     )
 }
