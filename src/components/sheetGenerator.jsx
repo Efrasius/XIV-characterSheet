@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import '../style/sheetForm.css'
-import SheetEditor from './sheetEditor';
+import '../style/sheetGenerator.css'
+//import SheetEditor from './sheetEditor';
 import JobList from './jobList';
 import JobForm from './jobForm';
 
 
 
-function SheetForm() {
+export default function SheetGenerator() {
     const [lodestoneId, setLodestoneId] = useState("");
     const [err, setErr] = useState("");
     const [iconPath, setIconPath] = useState("Set1/");
@@ -43,27 +43,15 @@ function SheetForm() {
                 setErr(error.message);
                 console.log("erreur lors du fetch : ", err);
             }
-            try {
-                fetch(`https://xivapi.com/pvpteam/${lodestoneId}`)
-                    .then (response => response.json())
-                    .then(data => {
-                        if (data.Error !== true) {
-                            setPvpArray(data.Pvpteam);
-                        }
-                    })
-            }
-            catch (error) {
-                setErr(error.message);
-                console.log("erreur lors du fetch : ", err);
-            }
         }
     }
 
 
 
     useEffect(() => {
-        console.log(jobStyle);
-    }, [jobStyle])
+
+
+    }, [])
 
     return (
         <div>
@@ -120,5 +108,3 @@ function SheetForm() {
         </div>
     )
 }
-
-export default SheetForm;

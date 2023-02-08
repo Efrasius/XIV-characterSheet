@@ -4,12 +4,7 @@ import CharacterInfos from "./characterInfos"
 import "../style/jobList.css";
 
 export default function JobList(props) {
-
-
-    const { jobList } = props;
-    const { iconPath } = props;
-    const { allInfos } = props;
-    const { jobStyle, setJobStyle, bgColor } = props;
+    const { jobStyle, setJobStyle, bgColor, jobList, iconPath, allInfos } = props;
 
     const jobs = {'tank': [], 'heal': [], 'physicDps': [], 'rangeDps': [], 'magicDps': [], 'craft': [], 'farm': []};
 

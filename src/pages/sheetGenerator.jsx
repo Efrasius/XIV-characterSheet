@@ -1,16 +1,16 @@
 import Header from '../components/header'
-import SheetForm from '../components/sheetForm'
+import SheetGenerator from '../components/sheetGenerator'
 import React from 'react';
 
-function SheetGenerator() {
+function SheetForm() {
     return (
         <div>
             <Header  pageTitle="Générateur de fiche"/>
             <section className="sheetForm">
-                <SheetForm />
+                <SheetGenerator />
             </section>
         </div>
     )
 }
 
-export default SheetGenerator;
+export default SheetForm;
