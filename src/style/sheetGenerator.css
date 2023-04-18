@@ -3,6 +3,10 @@
     src: url("../fonts/OPTIEngeEtienne.otf")
 }
 
+p {
+    transform: scale(1, .5);
+}
+
 .sheetForm {
     margin-bottom: 15px;
 }

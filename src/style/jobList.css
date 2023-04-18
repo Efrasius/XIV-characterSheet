@@ -4,7 +4,6 @@
 }
 
 h2 {
-    transform: scale(1, .5);
     font-weight: lighter;
     margin: 0px;
     border-bottom: solid 2px #C0C0C0;
@@ -48,7 +47,6 @@ h2 {
 }
 
 .lvl {
-    transform: scale(1, .5);
     margin-top: 0px;
 }
 

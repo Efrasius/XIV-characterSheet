@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as htmlToImage from 'html-to-image';
 import { SketchPicker } from 'react-color';
 import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
+import { faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../style/jobForm.css";
 
@@ -31,17 +32,43 @@ export default function JobForm(props) {
 
     }
 
+    function portraitUpload(e) {
+        console.log(e.target.files[0]);
+
+        if (!e.target.files[0]) {
+            setJobStyle(currValue => ({ ...currValue, portrait: '' }));
+        } else
+            setJobStyle(currValue => ({ ...currValue, portrait: URL.createObjectURL(e.target.files[0]) }));
+
+    }
+
+    function deletePortrait(e) {
+        
+
+        document.querySelector('#portrait').value = '';
+        setJobStyle(currValue => ({ ...currValue, portrait: '' }));
+    }
+
     function changeBackground(color, event) {
         setBgColor(color.rgb);
     }
 
     function handleChange(color, event) {
         let picker = event.target.closest(".colorPicker");
+        if (!picker) {
+            return;
+        }
+        console.log(color.rgb);
 
         if (picker.classList.contains("levelPicker"))
             setJobStyle(currValue => ({ ...currValue, lvlColor: color.rgb }))
         else if (picker.classList.contains("infosPicker"))
             setJobStyle(currValue => ({ ...currValue, infosColor: color.rgb }))
+    }
+
+    function resetColor() {
+        setJobStyle(currValue => ({ ...currValue, lvlColor: {r: 0, g: 0, b: 0, a:1}, infosColor: {r: 0, g: 0, b: 0, a:1} }))
+        setBgColor({r: 0, g: 0, b: 0, a:0});
     }
 
     useEffect(() => {
@@ -61,7 +88,8 @@ export default function JobForm(props) {
                     <h2>Infos</h2>
                     <div className='formLabeled formStyle'>
                         <label className='formLabel' htmlFor='portrait'>Portrait</label>
-                        <input id='portrait' name='portrait' type='checkbox' checked={jobStyle.portrait} onChange={(e) => setJobStyle(currValue => ({ ...currValue, portrait: e.target.checked }))} />
+                        <input id='portrait' name='portrait' type='file' accept='image/*'  onChange={portraitUpload} />
+                        {jobStyle.portrait? <FontAwesomeIcon className='delete' icon={faX} onClick={deletePortrait} />: ''}
                     </div>
                     <div className='formLabeled formStyle'>
                         <label className='formLabel' htmlFor='name'>Nom du Personnage</label>
@@ -95,6 +123,10 @@ export default function JobForm(props) {
                         <FontAwesomeIcon className={`paletteIcon ${formParams.infosColor? 'rotate': ''}`} icon={faPaintBrush} onClick={(e) => formParams.infosColor? setFormParams(currValue => ({ ...currValue, infosColor: false })): setFormParams(currValue => ({ ...currValue, infosColor: true }))} />
                         <SketchPicker id="infosColorPicker" className={`colorPicker infosPicker ${formParams.infosColor? '': 'none'}`} color={jobStyle.infosColor} onChange={handleChange} />
                     </div>
+                    <div className='buttonWrapper'>
+                        <button className="colorReset" type="button" onClick={resetColor}>Reset</button>
+                    </div>
+
                 </div>
                 <input type="submit" id="lvlFormSubmit" className="formSubmit" value="Télécharger Ma fiche !" onClick={generateImg} />
             </form>

@@ -13,31 +13,26 @@ export default function SheetGenerator() {
     const [jobArray, setJobArray] = useState([]);
     const [pvpArray, setPvpArray] = useState([]);
     const [formParams, setFormParams] = useState({ background: false, lvlColor: false, infosColor: false })
-    const [jobStyle, setJobStyle] = useState({ portrait: false, name: false, server: false, position: 'top', lvlColor: '', infosColor: '' });
+    const [jobStyle, setJobStyle] = useState({ portrait: '', name: false, server: false, position: 'top', lvlColor: '', infosColor: '' });
     const [bgColor, setBgColor] = useState({});
     const [displayForm, setDisplayForm] = useState(false);
 
 
-    const launchApi = async (event) => {
-        event.preventDefault();
+    const launchApi = async (e) => {
+        e.preventDefault();
 
+        console.log("allo")
+        let data;
         if (lodestoneId.length === 0) {
             alert("Veuillez entrer l'id lodestone de votre personnage")
         } else {
             try {
-                fetch(`https://xivapi.com/character/${lodestoneId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.Error !== true) {
-                            //console.log(typeof data.Character.ClassJobs)
-                            setJobArray(data.Character);
-                            setDisplayForm(true);
-                            //generateImg();
-                        }
-                        else {
-                            alert("Erreur lors de la récupération des informations. Vérifiez l'id.")
-                        }
-                    })
+
+                const fetchData = await fetch(`https://xivapi.com/character/${lodestoneId}`)
+                data = await fetchData.json();
+                setJobArray(data.Character);
+                setDisplayForm(true);
+
             }
             catch (error) {
                 setErr(error.message);
@@ -49,7 +44,6 @@ export default function SheetGenerator() {
 
 
     useEffect(() => {
-
 
     }, [])
 
@@ -99,8 +93,8 @@ export default function SheetGenerator() {
                 <input type="submit" className="formSubmit" value="Générer Ma fiche !" onClick={launchApi} />
             </form>
             <div className='jobs'>
-                {displayForm?<JobList jobList={jobArray.ClassJobs} allInfos={jobArray} iconPath={iconPath} jobStyle={jobStyle} setJobStyle={setJobStyle} bgColor={bgColor} />: ''}
-                {displayForm?<JobForm formParams={formParams} setFormParams={setFormParams} jobStyle={jobStyle} setJobStyle={setJobStyle} bgColor={bgColor} setBgColor={setBgColor} />: ''}
+                {displayForm ? <JobList jobList={jobArray.ClassJobs} allInfos={jobArray} iconPath={iconPath} jobStyle={jobStyle} setJobStyle={setJobStyle} bgColor={bgColor} /> : ''}
+                {displayForm ? <JobForm formParams={formParams} setFormParams={setFormParams} jobStyle={jobStyle} setJobStyle={setJobStyle} bgColor={bgColor} setBgColor={setBgColor} /> : ''}
             </div>
             {/*<div className="editor">
                 <SheetEditor />
